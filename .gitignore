@@ -1,5 +1,22 @@
 # Dependency directories
 node_modules/
 
-# Env
+# Env 
 .env
+
+# IDE
+.idea/
+.vscode/
+
+# Build
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
