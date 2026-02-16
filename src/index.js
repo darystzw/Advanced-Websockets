@@ -2,6 +2,7 @@ import express from 'express';
 import http from 'http';
 import {matchRouter} from "./routes/matches.js";
 import {attachWebsocketServer} from "./ws/server.js";
+import {securityMiddleware} from "./arcjet.js";
 
 const PORT = process.env.PORT || 8000;
 const HOST = process.env.HOST || '0.0.0.0';
@@ -11,10 +12,13 @@ const server = http.createServer(app);
 
 app.use(express.json());
 
+
 app.get('/', (req, res)=>{
   res.send('Hello from Express Server');
-})
+});
+app.get("/favicon.ico", (_req, res) => res.status(204).end());
 
+app.use(securityMiddleware());
 app.use('/matches', matchRouter);
 
 const { broadcastMatchCreated } = attachWebsocketServer(server);
